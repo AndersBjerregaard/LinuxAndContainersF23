@@ -20,8 +20,12 @@ node                            16         3b66eb585643    5 days ago
 
 Running the image with -d runs the container in detached mode, leaving the container running in the background. The -p flag redirects a public port to a private port inside the container:
 
+EDIT: With the current configuration, the container only listens to requests from localhost, meaning it won't respond to requests from outside the container. To do a workaround, use the host's network instead:
+
 ```
 docker run -p 49160:8080 -d <your username>/node-web-app
+
+docker run --network host -d <your username>/node-web-app
 ```
 
 Get the output of the app:
@@ -52,6 +56,8 @@ ecce33b30ebf  <your username>/node-web-app:latest  npm start  ...   49160->8080
 In the example above, Docker mapped the 8080 port inside of the container to the port 49160 on the machine.
 
 Now you can call the app using curl (install if needed via: sudo apt-get install curl):
+
+If you used the host network configuration, you'd replace the '49160' with the port that the container exposed (8080).
 
 ```
 $ curl -i localhost:49160
