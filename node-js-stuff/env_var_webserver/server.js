@@ -6,7 +6,8 @@ const express = require('express');
 
 // Constants
 const PORT = 8080;
-const HOST = '127.0.0.1'; // localhost
+const HOST = '0.0.0.0'; // All network addresses. Previous iteration used localhost,
+// which means the server'll only be listening to the same unit's network.
 
 // App
 const app = express();
