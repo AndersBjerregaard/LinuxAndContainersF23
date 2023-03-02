@@ -14,9 +14,16 @@ const app = express();
 
 // http get route
 app.get('/', (req, res) => {
-    res.send('Showcase of reading system environment variable dynamically through a webserver');
+    res.send('Showcase of reading system environment variable dynamically through a webserver\n' + 
+    'Navigate to the route: \"/environment\" to read the PATH environment variable.');
+});
+
+app.get('/environment', (req, res) => {
+    let env_var = process.env.PATH;
+    res.send('PATH environment variable was loaded as: ' + env_var + 
+    '\n\nThis is loaded at request. Meaning, should the environment variable change, this page should simply be refreshed to see.')
 });
 
 app.listen(PORT, HOST, () => {
-    console.log(`Running on http://${HOST}:${PORT}`);
+    console.log(`Listening on http://${HOST}:${PORT}`);
 });
